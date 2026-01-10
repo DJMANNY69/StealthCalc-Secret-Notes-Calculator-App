@@ -1,7 +1,9 @@
 package com.fury.stealthcalc.presentation.add_edit_note
 
 import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -27,7 +29,7 @@ class AddEditNoteViewModel @Inject constructor(
     private val _noteContent = mutableStateOf("")
     val noteContent: State<String> = _noteContent
 
-    private val _noteColor = mutableStateOf(PrimaryOrange.toArgb())
+    private val _noteColor = mutableIntStateOf(Color(0xFF1F1F1F).toArgb())
     val noteColor: State<Int> = _noteColor
 
     private val _eventFlow = MutableSharedFlow<UiEvent>()

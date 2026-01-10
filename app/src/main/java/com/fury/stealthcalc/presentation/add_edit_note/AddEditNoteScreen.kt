@@ -1,25 +1,35 @@
 package com.fury.stealthcalc.presentation.add_edit_note
 
+import androidx.compose.animation.Animatable
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Save
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.fury.stealthcalc.ui.theme.DarkBackground
-import com.fury.stealthcalc.ui.theme.PrimaryOrange
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddEditNoteScreen(
     navController: NavController,
@@ -28,7 +38,22 @@ fun AddEditNoteScreen(
 ) {
     val titleState = viewModel.noteTitle.value
     val contentState = viewModel.noteContent.value
-    val snackbarHostState = SnackbarHostState()
+    val currentColor = viewModel.noteColor.value
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+
+    // 1. Smooth Color Animation
+    val animatedBackground by animateColorAsState(
+        targetValue = Color(currentColor),
+        animationSpec = tween(durationMillis = 500),
+        label = "ColorAnimation"
+    )
+
+    // 2. Determine Text Contrast (Black text for light notes, White for dark notes)
+    val isDarkNote = animatedBackground.luminance() < 0.5f
+    val contentColor = if (isDarkNote) Color.White else Color.Black
+    val placeholderColor = if (isDarkNote) Color.White.copy(alpha = 0.5f) else Color.Black.copy(alpha = 0.5f)
 
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event ->
@@ -37,42 +62,84 @@ fun AddEditNoteScreen(
                     snackbarHostState.showSnackbar(event.message)
                 }
                 is AddEditNoteViewModel.UiEvent.SaveNote -> {
-                    navController.navigateUp() // Go back to Vault
+                    navController.navigateUp()
                 }
             }
         }
     }
 
     Scaffold(
+        topBar = {
+            // Transparent Top Bar
+            CenterAlignedTopAppBar(
+                title = {},
+                navigationIcon = {
+                    IconButton(onClick = { navController.navigateUp() }) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back",
+                            tint = contentColor
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = Color.Transparent
+                )
+            )
+        },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { viewModel.onEvent(AddEditNoteEvent.SaveNote) },
-                containerColor = PrimaryOrange
+                // FAB is always opposite color of the note for visibility
+                containerColor = if (isDarkNote) Color.White else Color.Black,
+                contentColor = if (isDarkNote) Color.Black else Color.White
             ) {
                 Icon(imageVector = Icons.Default.Save, contentDescription = "Save Note")
             }
         },
-        snackbarHost = { SnackbarHost(snackbarHostState) }
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+        containerColor = animatedBackground // Set Scaffold background
     ) { padding ->
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color(noteColor)) // Background changes based on note color!
                 .padding(padding)
-                .padding(16.dp)
+                .verticalScroll(rememberScrollState()) // Allow scrolling for long notes
+                .padding(horizontal = 24.dp)
         ) {
-            // Color Picker Row (Simple version)
+
+            // 3. Elegant Color Picker Row
             Row(
-                modifier = Modifier.fillMaxWidth().padding(8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 12.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                val colors = listOf(Color(0xFFD32F2F), Color(0xFF1976D2), Color(0xFF388E3C), Color(0xFFFBC02D), Color(0xFF7B1FA2))
+                // A nice palette of professional colors
+                val colors = listOf(
+                    Color(0xFF1F1F1F), // The "Stealth" Dark
+                    Color(0xFF5D4037), // Deep Brown
+                    Color(0xFF303F9F), // Midnight Blue
+                    Color(0xFFEF9A9A), // Pastel Red
+                    Color(0xFF80DEEA), // Pastel Cyan
+                    Color(0xFFFFF59D), // Pastel Yellow
+                    Color(0xFFA5D6A7)  // Pastel Green
+                )
+
                 colors.forEach { color ->
+                    val isSelected = currentColor == color.toArgb()
                     Box(
                         modifier = Modifier
-                            .size(50.dp)
+                            .size(40.dp)
+                            .shadow(4.dp, CircleShape)
                             .clip(CircleShape)
                             .background(color)
+                            .border(
+                                width = if (isSelected) 3.dp else 1.dp,
+                                color = if (isSelected) contentColor else Color.Transparent,
+                                shape = CircleShape
+                            )
                             .clickable {
                                 viewModel.onEvent(AddEditNoteEvent.ChangeColor(color.toArgb()))
                             }
@@ -80,38 +147,57 @@ fun AddEditNoteScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-            // Title Input
-            TextField(
-                value = titleState,
+            // 4. Custom Title Field (No ugly underlines)
+            TransparentHintTextField(
+                text = titleState,
+                hint = "Title...",
                 onValueChange = { viewModel.onEvent(AddEditNoteEvent.EnteredTitle(it)) },
-                placeholder = { Text(text = "Title", color = Color.DarkGray) },
-                textStyle = MaterialTheme.typography.headlineMedium,
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color.Transparent,
-                    unfocusedContainerColor = Color.Transparent,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent
-                )
+                textStyle = MaterialTheme.typography.headlineMedium.copy(color = contentColor),
+                hintColor = placeholderColor,
+                singleLine = true
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Content Input
-            TextField(
-                value = contentState,
+            // 5. Custom Content Field
+            TransparentHintTextField(
+                text = contentState,
+                hint = "Type your secret here...",
                 onValueChange = { viewModel.onEvent(AddEditNoteEvent.EnteredContent(it)) },
-                placeholder = { Text(text = "Type your secret content...", color = Color.DarkGray) },
-                textStyle = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.fillMaxHeight(),
-                colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color.Transparent,
-                    unfocusedContainerColor = Color.Transparent,
-                    focusedIndicatorColor = Color.Transparent,
-                    unfocusedIndicatorColor = Color.Transparent
-                )
+                textStyle = MaterialTheme.typography.bodyLarge.copy(color = contentColor, lineHeight = MaterialTheme.typography.bodyLarge.lineHeight * 1.5),
+                hintColor = placeholderColor,
+                modifier = Modifier.fillMaxHeight() // Fill rest of screen
+            )
+        }
+    }
+}
+
+// Helper Composable for clean text input
+@Composable
+fun TransparentHintTextField(
+    text: String,
+    hint: String,
+    modifier: Modifier = Modifier,
+    onValueChange: (String) -> Unit,
+    textStyle: androidx.compose.ui.text.TextStyle = LocalTextStyle.current,
+    hintColor: Color = Color.Gray,
+    singleLine: Boolean = false
+) {
+    Box(modifier = modifier) {
+        androidx.compose.foundation.text.BasicTextField(
+            value = text,
+            onValueChange = onValueChange,
+            singleLine = singleLine,
+            textStyle = textStyle,
+            modifier = Modifier.fillMaxWidth()
+        )
+        if (text.isEmpty()) {
+            Text(
+                text = hint,
+                style = textStyle,
+                color = hintColor
             )
         }
     }

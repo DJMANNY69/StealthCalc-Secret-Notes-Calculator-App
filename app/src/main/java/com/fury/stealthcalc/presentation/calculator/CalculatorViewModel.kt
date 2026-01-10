@@ -52,7 +52,7 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
         if (currentExpression.isBlank()) return
 
         // CHECK FOR SECRET CODE (67/67 or 69/67)
-        if (currentExpression == "67/67") {
+        if (currentExpression == "69/67") {
             _input.value = ""
             viewModelScope.launch {
                 // Trigger Biometric Prompt

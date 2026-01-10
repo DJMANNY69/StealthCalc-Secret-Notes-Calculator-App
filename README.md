@@ -11,7 +11,7 @@
 
 <br />
 
-<a href="https://github.com/SilentFURY-x/ShopAThing-App/releases/download/v1.0.0/ShopAThing-v1.0.0.apk">
+<a href="https://github.com/SilentFURY-x/StealthCalc-Secret-Notes-Calculator-App/releases/download/v1.0.0/StealthCalc-v1.0.0.apk">
   <img src="https://img.shields.io/badge/Download-APK-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Download APK"/>
 </a>
 
@@ -123,7 +123,7 @@ com.fury.stealthcalc
 
 **Download the App:**
 * Click below to download the latest stable version (v1.0.0) for your Android device:
-* 👉 **[Download ShopAThing-v1.0.0.apk](https://github.com/SilentFURY-x/ShopAThing-App/releases/download/v1.0.0/ShopAThing-v1.0.0.apk)**
+* 👉 **[Download ShopAThing-v1.0.0.apk](https://github.com/SilentFURY-x/StealthCalc-Secret-Notes-Calculator-App/releases/download/v1.0.0/StealthCalc-v1.0.0.apk)**
     
 **OR**
 * To explore the code or build it yourself:
@@ -132,7 +132,7 @@ com.fury.stealthcalc
   
   ```bash
   
-  git clone [https://github.com/SilentFURY-x/StealthCalc.git](https://github.com/SilentFURY-x/StealthCalc.git)
+  git clone https://github.com/SilentFURY-x/StealthCalc-Secret-Notes-Calculator-App.git
   
   ```
   2. Open in Android Studio

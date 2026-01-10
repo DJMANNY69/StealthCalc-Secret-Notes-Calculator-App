@@ -3,25 +3,27 @@ package com.fury.stealthcalc.presentation.calculator
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
-import javax.inject.Inject
-import net.objecthunter.exp4j.ExpressionBuilder // Using the math library we added
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import net.objecthunter.exp4j.ExpressionBuilder
+import javax.inject.Inject
 
 @HiltViewModel
 class CalculatorViewModel @Inject constructor() : ViewModel() {
 
-    // State for what is currently typed
     private val _input = MutableStateFlow("")
     val input = _input.asStateFlow()
 
-    // State for the calculation result (history or current answer)
     private val _result = MutableStateFlow("")
     val result = _result.asStateFlow()
+
+    // History State
+    private val _history = MutableStateFlow<List<String>>(emptyList())
+    val history = _history.asStateFlow()
 
     private val _uiEvent = Channel<CalculatorUiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
@@ -35,6 +37,7 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
                 _result.value = ""
             }
             is CalculatorAction.Delete -> {
+                // Handle DEL (Backspace)
                 if (_input.value.isNotEmpty()) {
                     _input.update { it.dropLast(1) }
                 }
@@ -46,41 +49,56 @@ class CalculatorViewModel @Inject constructor() : ViewModel() {
 
     private fun performCalculation() {
         val currentExpression = _input.value
+        if (currentExpression.isBlank()) return
 
-        // 1. CHECK FOR SECRET CODE
-        // CHECK FOR SECRET CODE)
-        if (currentExpression == "69/67") {
-            _input.value = "" // Clear screen
+        // CHECK FOR SECRET CODE (67/67 or 69/67)
+        if (currentExpression == "67/67") {
+            _input.value = ""
             viewModelScope.launch {
-                _uiEvent.send(CalculatorUiEvent.ShowBiometricPrompt) // Trigger fingerprint, not nav
+                // Trigger Biometric Prompt
+                _uiEvent.send(CalculatorUiEvent.ShowBiometricPrompt)
             }
             return
         }
 
-        // 2. Perform Math
         try {
             val expression = ExpressionBuilder(currentExpression).build()
             val res = expression.evaluate()
-            // If it's a whole number, remove the ".0"
             val longRes = res.toLong()
-            if (res == longRes.toDouble()) {
-                _result.value = longRes.toString()
+
+            val finalResult = if (res == longRes.toDouble()) {
+                longRes.toString()
             } else {
-                _result.value = res.toString()
+                res.toString()
             }
+
+            _result.value = finalResult
+
+            // Add to History (Only valid calculations)
+            val historyEntry = "$currentExpression = $finalResult"
+            _history.update { list ->
+                (list + historyEntry).takeLast(10) // Keep last 10
+            }
+
         } catch (e: Exception) {
             _result.value = "Error"
         }
     }
 
+    // THIS WAS MISSING: The function Navigation.kt calls on success
     fun onBiometricSuccess() {
         viewModelScope.launch {
             _uiEvent.send(CalculatorUiEvent.NavigateToVault)
         }
     }
+
+    fun clearInput() {
+        _input.value = ""
+        _result.value = ""
+    }
 }
 
-// Define actions to keep code clean
+// Ensure this sealed class is at the bottom
 sealed class CalculatorAction {
     data class Number(val number: String) : CalculatorAction()
     data class Operation(val operation: String) : CalculatorAction()

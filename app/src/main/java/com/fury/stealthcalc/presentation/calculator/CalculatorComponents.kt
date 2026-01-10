@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
@@ -27,10 +28,10 @@ fun CalculatorButton(
     Box(
         contentAlignment = Alignment.Center,
         modifier = modifier
-            .clip(CircleShape) // Makes it round
+            .fillMaxHeight() // Fill available vertical space in the Row
+            .clip(CircleShape)
             .background(backgroundColor)
             .clickable { onClick() }
-            .then(modifier) // Allows external modifiers like aspect ratio
     ) {
         Text(
             text = symbol,
@@ -38,5 +39,32 @@ fun CalculatorButton(
             color = textColor,
             fontWeight = FontWeight.Medium
         )
+    }
+}
+
+// Add this below your existing CalculatorButton function
+
+@Composable
+fun CalculatorIconButton(
+    modifier: Modifier = Modifier,
+    backgroundColor: Color,
+    contentColor: Color,
+    onClick: () -> Unit,
+    icon: @Composable () -> Unit
+) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier
+            .fillMaxHeight() // Fill the row height
+            .clip(CircleShape) // Or RoundedCornerShape(20.dp) for oval look
+            .background(backgroundColor)
+            .clickable { onClick() }
+    ) {
+        // Use CompositionLocal to force icon color
+        androidx.compose.runtime.CompositionLocalProvider(
+            androidx.compose.material3.LocalContentColor provides contentColor
+        ) {
+            icon()
+        }
     }
 }

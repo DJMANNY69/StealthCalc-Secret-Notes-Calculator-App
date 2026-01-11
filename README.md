@@ -124,50 +124,53 @@ com.fury.stealthcalc
 >**NOTE: — Biometric must be enabled on your device.**
 
 **Download the App:**
-* Click below to download the latest stable version (v1.0.0) for your Android device:
-* 👉 **[Download StealthCalc-v1.0.0.apk](https://github.com/SilentFURY-x/StealthCalc-Secret-Notes-Calculator-App/releases/download/v1.0.0/StealthCalc-v1.0.0.apk)**
+  * Click below to download the latest stable version (v1.0.0) for your Android device:
+  * 👉 **[Download StealthCalc-v1.0.0.apk](https://github.com/SilentFURY-x/StealthCalc-Secret-Notes-Calculator-App/releases/download/v1.0.0/StealthCalc-v1.0.0.apk)**
     
+<br />
+
 **OR**
-* To explore the code or build it yourself:
 
-  1. Clone the repository
-  
-    ```bash
-    
-    git clone https://github.com/SilentFURY-x/StealthCalc-Secret-Notes-Calculator-App.git
-    
-    ```
-    
-  2. Open in Android Studio
-    
-    * Ensure you are using Android Studio Koala or newer.
-    * Minimum SDK: API 26 (Android 8.0).
-  
-  3. Build & Run
-    
-    * Sync Gradle.
-    * Select app configuration.
-    * Run on an Emulator (with Fingerprint enabled) or Physical Device.
+<br /> 
 
+**To explore the code or build it yourself:**
+
+  1. **Clone the repository**
+  
+     ```bash
+      git clone https://github.com/SilentFURY-x/StealthCalc-Secret-Notes-Calculator-App.git
+     ```
+    
+  2. **Open in Android Studio**
+    
+     * Ensure you are using Android Studio Koala or newer.
+     * Minimum SDK: API 26 (Android 8.0).
+  
+  3. **Build & Run**
+     * Sync Gradle.
+     * Select app configuration.
+     * Run on an Emulator (with Fingerprint enabled) or Physical Device.
 ---
 
 ## 🤝 Contributing
 
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-1.  Fork the Project
-2.  Create your Feature Branch:
-    ```bash
-    git checkout -b feature/AmazingFeature
-    ```
-3.  Commit your Changes:
-    ```bash
-    git commit -m 'Add some AmazingFeature'
-    ```
-4.  Push to the Branch:
-    ```bash
-    git push origin feature/AmazingFeature
-    ```
-5.  Open a Pull Request
+1.  **Fork the Project**
+2.  **Create your Feature Branch:**
+
+      ```bash
+      git checkout -b feature/AmazingFeature
+      ```
+4.  **Commit your Changes:**
+
+      ```bash
+      git commit -m 'Add some AmazingFeature'
+      ```
+6.  **Push to the Branch:**
+      ```bash
+      git push origin feature/AmazingFeature
+      ```
+7.  **Open a Pull Request**
 
 ---
 

